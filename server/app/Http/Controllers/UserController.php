@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Mockery\CountValidator\Exception;
 use App\Models\User;
+use App\Models\Relational\UserRole;
 use App\Utils;
 
 class UserController extends Controller
@@ -41,8 +42,15 @@ class UserController extends Controller
     public function show($id) {
         $user = User::find($id);
 
+        if(!isset($user))
+            return [
+                'success' => false
+            ];
+
+        $user->listRoles();
+
         return [
-            'success' => isset($user),
+            'success' => true,
             'data' => $user
         ];
     }
@@ -50,7 +58,8 @@ class UserController extends Controller
     public function store(Request $request) {
         DB::beginTransaction();
         try {
-			$data = Input::except([
+            $roles = Input::get('roles', null);
+            $data = Input::except([
 				'roles',
             ]);
 
@@ -58,6 +67,15 @@ class UserController extends Controller
                 $data['password'] = bcrypt($data['password']);
             
             $user = User::create($data);
+            
+			if(!is_null($roles)) {
+				foreach($roles as $role_id) {
+					UserRole::create([
+						'user_id' => $user['id'],
+						'role_id' => $role_id
+					]);
+				}
+			}
 
             DB::commit();
             
@@ -73,6 +91,7 @@ class UserController extends Controller
     public function update($id, Request $request) {
         DB::beginTransaction();
         try {
+            $roles = Input::get('roles');
             $data = Input::except([
 				'roles'
             ]);
@@ -89,6 +108,17 @@ class UserController extends Controller
             
             $user->update($data);
             
+            // If changed roles
+			if(!is_null($roles)) {
+                UserRole::where('user_id', $user['id'])->delete();
+				foreach($roles as $role_id) {
+					UserRole::create([
+						'user_id' => $user['id'],
+						'role_id' => $role_id
+					]);
+				}
+			}
+
 			if($hasToEditPassword) {
                 //Send e-mail to user with new password
             }
@@ -106,6 +136,7 @@ class UserController extends Controller
     public function destroy($id) {
         DB::beginTransaction();
         try {
+            UserRole::where('user_id', $id)->delete();
             User::where('id', $id)
                 ->firstOrFail()
                 ->delete();
