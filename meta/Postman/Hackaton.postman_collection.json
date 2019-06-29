@@ -163,6 +163,132 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URI}}/role",
+							"host": [
+								"{{URI}}"
+							],
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URI}}/role/1",
+							"host": [
+								"{{URI}}"
+							],
+							"path": [
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Teste\"\n}"
+						},
+						"url": {
+							"raw": "{{URI}}/role",
+							"host": [
+								"{{URI}}"
+							],
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Amarelo\"\n}"
+						},
+						"url": {
+							"raw": "{{URI}}/role/1",
+							"host": [
+								"{{URI}}"
+							],
+							"path": [
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URI}}/role/1",
+							"host": [
+								"{{URI}}"
+							],
+							"path": [
+								"role",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
