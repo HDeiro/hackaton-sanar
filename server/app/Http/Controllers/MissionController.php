@@ -11,69 +11,14 @@ use App\Utils;
 
 class MissionController extends Controller
 {
-    public function index() {
-        $query = Mission::where(function($query) {
-            if (Input::has('q') && !empty(Input::get('q'))) {
-                $q = Input::get('q');
-                $query->where('mission.description', 'like', '%'.$q.'%')
-                    ->orWhere('mission.score', 'like', intval($q));
-            }
-        });
-
-        // Count the number of occurrences in Mission table
-        $count = $query->count();
-
-        // Skips / Fetch elements
-        if( !Input::has('skip') && !Input::has('take')) {
-            $dataset = $query->get();
-        } else {
-            $dataset = $query->skip(Input::get('skip', 0))
-                ->take(Input::get('take', Utils::$posts_per_page))
-            ->get();
-        }
-
-        return [
-            'success' => true,
-            'data' => $dataset,
-            'count' => $count
-        ];
-    }
-    
-    public function show($id) {
-        $mission = Mission::find($id);
-
-        return [
-            'success' => isset($mission),
-            'data' => $mission
-        ];
-    }
-
-    public function store(Request $request) {
+    public function completeMission() {
         DB::beginTransaction();
         try {
-			$data = Input::except([]);
+            $mission_id = Input::get('mission_id');
 
-            $mission = Mission::create($data);
-
+            Mission::find($mission_id)->update(['is_completed' => 1]);
             DB::commit();
             
-            return [
-                'success' => true
-            ];
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return Utils::treatException($ex, 'Não foi possível criar Usuário');
-        }
-    }
-
-    public function update($id, Request $request) {
-        DB::beginTransaction();
-        try {
-            $data = Input::except([]);
-            
-            Mission::find($id)->update($data);
-            
-            DB::commit();
             return [
                 'success' => true
             ];
@@ -83,21 +28,27 @@ class MissionController extends Controller
         }
     }
 
-    public function destroy($id) {
-        DB::beginTransaction();
+    public function listUserMissions() {
         try {
-            Mission::where('id', $id)
-                ->firstOrFail()
-            ->delete();
+            $missions = Mission::where(function($query) {
+                if(Input::has('begin_date'))
+                    $query->whereDate('mission_deadline', '>=', Input::get('begin_date'));
+                if(Input::has('end_date'))
+                    $query->whereDate('mission_deadline', '<=', Input::get('end_date'));
+                if(Input::has('is_completed'))
+                    $query->where('is_completed', Input::get('is_completed'));
+                if(Input::has('author_id'))
+                    $query->where('author_id', Input::get('author_id'));
+                if(Input::has('description'))
+                    $query->where('description', 'like', '%'.Input::get('description').'%');
+            })->where('patient_id', Input::get('patient_id'))->get();
 
-            DB::commit();
-            
             return [
-				'success' => true
-			];
+                'success' => true,
+                'data' => $missions
+            ];
         } catch (\Exception $ex) {
-            DB::rollback();
-            return Utils::treatException($ex, 'Não foi possível deletar Usuário');
+            return Utils::treatException($ex, 'Não foi possível atualizar Usuário');
         }
     }
 }

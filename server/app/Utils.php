@@ -7,8 +7,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as MailException;
 
 class Utils {
-    // Default size of posts returned in index requests
     public static $posts_per_page = 25;
+    public static $default_date_format = 'Y-m-d H:i';
 
     // Defines the default pattern for exception handling
     public static function treatException($ex, $msg = 'Não foi possível atender sua solicitação no momento.', $code = 500) {

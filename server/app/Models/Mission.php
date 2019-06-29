@@ -16,5 +16,8 @@ class Mission extends Model
       'prescription_item_id',
       'created_at',
       'updated_at',
+      'mission_deadline',
+      'patient_id',
+      'is_completed'
     ];
 }

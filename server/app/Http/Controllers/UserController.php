@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Mockery\CountValidator\Exception;
 use App\Models\User;
 use App\Models\Relational\UserRole;
-use App\Models\Relational\UserScore;
 use App\Utils;
 
 class UserController extends Controller
@@ -23,8 +22,8 @@ class UserController extends Controller
         });
         // Count the number of occurrences in User table
         $count = $query->count();
+        
         // Skips / Fetch elements
-
         if( !Input::has('skip') && !Input::has('take')) {
             $dataset = $query->get();
         } else {
@@ -49,6 +48,7 @@ class UserController extends Controller
             ];
 
         $user->listRoles();
+        $user->calcScore();
 
         return [
             'success' => true,

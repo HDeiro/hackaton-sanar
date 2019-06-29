@@ -13,7 +13,11 @@ class PrescriptionItem extends Model
       'description',
       'extra_info',
       'periodicity',
+      'periodicity_type',
       'prescription_id',
+      'is_medicine',
+      'initial_date',
+      'final_date',
       'created_at',
       'updated_at',
     ];
