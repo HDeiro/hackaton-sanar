@@ -5,20 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
-use App\Models\Role;
+use App\Models\Prescription;
 use App\Utils;
 
-class RoleController extends Controller
+class PrescriptionController extends Controller
 {
-    public function index() {
-        $query = Role::where(function($query) {
-            if (Input::has('q') && !empty(Input::get('q'))) {
+	public function index() {
+        $query = Prescription::where(function($query) {
+            /*if (Input::has('q') && !empty(Input::get('q'))) {
                 $q = Input::get('q');
-                $query->where('role.description', 'like', '%'.$q.'%');
-            }
+                $query->where('prescription.author_id', 'like', '%'.$q.'%');
+            }*/
         });
 
-        // Count the number of occurrences in Role table
+        // Count the number of occurrences in Prescription table
         $count = $query->count();
 
         // Skips / Fetch elements
@@ -38,7 +38,7 @@ class RoleController extends Controller
     }
 
     public function show($id) {
-        $role = Role::find($id);
+        $role = Prescription::find($id);
 
         return [
             'success' => isset($role),
@@ -51,7 +51,7 @@ class RoleController extends Controller
         try {
 			$data = Input::except([]);
 
-            $role = Role::create($data);
+            $role = Prescription::create($data);
 
             DB::commit();
 
@@ -69,7 +69,7 @@ class RoleController extends Controller
         try {
             $data = Input::except([]);
 
-            Role::find($id)->update($data);
+            Prescription::find($id)->update($data);
 
             DB::commit();
             return [
@@ -84,7 +84,7 @@ class RoleController extends Controller
     public function destroy($id) {
         DB::beginTransaction();
         try {
-            Role::where('id', $id)
+            Prescription::where('id', $id)
                 ->firstOrFail()
             ->delete();
 

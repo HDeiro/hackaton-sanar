@@ -38,7 +38,7 @@ class UserController extends Controller
             'count' => $count
         ];
     }
-    
+
     public function show($id) {
         $user = User::find($id);
 
@@ -65,9 +65,9 @@ class UserController extends Controller
 
             if(Input::has('password') && ! is_null($data['password']))
                 $data['password'] = bcrypt($data['password']);
-            
+
             $user = User::create($data);
-            
+
 			if(!is_null($roles)) {
 				foreach($roles as $role_id) {
 					UserRole::create([
@@ -78,7 +78,7 @@ class UserController extends Controller
 			}
 
             DB::commit();
-            
+
             return [
                 'success' => true
             ];
@@ -95,19 +95,19 @@ class UserController extends Controller
             $data = Input::except([
 				'roles'
             ]);
-            
+
 			$hasToEditPassword = Input::has('password') && ! is_null($data['password']);
-            
+
             $user = User::find($id);
-            
+
             // Encrypt password if it has been sent
             if($hasToEditPassword) {
 				$newPassword = $data['password'];
 				$data['password'] = bcrypt($newPassword);
 			}
-            
+
             $user->update($data);
-            
+
             // If changed roles
 			if(!is_null($roles)) {
                 UserRole::where('user_id', $user['id'])->delete();
@@ -142,7 +142,7 @@ class UserController extends Controller
                 ->delete();
 
             DB::commit();
-            
+
             return [
 				'success' => true
 			];

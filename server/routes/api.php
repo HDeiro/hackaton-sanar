@@ -26,5 +26,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function() {
 
 		Route::resource('user', 'UserController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 		Route::resource('role', 'RoleController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+		Route::resource('prescription', 'PrescriptionController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
 	// });
 });
