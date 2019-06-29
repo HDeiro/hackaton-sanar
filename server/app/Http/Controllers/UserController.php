@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Mockery\CountValidator\Exception;
 use App\Models\User;
 use App\Models\Relational\UserRole;
+use App\Models\Relational\UserScore;
 use App\Utils;
 
 class UserController extends Controller
