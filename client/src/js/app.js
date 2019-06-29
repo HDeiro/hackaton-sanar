@@ -1,5 +1,5 @@
 moment.locale('pt-BR');
-const api = 'http://loreweb.com.br/janbook/api';
+const api = '';
 
 // Dom7
 const $$ = Dom7;
@@ -21,8 +21,8 @@ document.addEventListener("deviceready", function(){
 
 $$('#logoIntro').animationEnd(function(){  
   setTimeout(function(){
-    app.router.navigate('/login/');
-  }, 2000);
+    auth.verif();
+  }, 1000);
 });
 
 

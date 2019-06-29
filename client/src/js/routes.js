@@ -6,5 +6,10 @@ routes = [
   {
     path: '/login',
     componentUrl: './src/pages/auth/login.html'
-  }
+  },
+  {
+    path: '/forgot-password/',
+    componentUrl: './src/pages/auth/login.html'
+  },
+  
 ];
