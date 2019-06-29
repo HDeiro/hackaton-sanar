@@ -23,8 +23,5 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function() {
 		Route::post('logout', 'AuthController@logout');
 		Route::post('refresh', 'AuthController@refresh');
 		Route::post('authenticate', 'AuthController@authenticate');
-		Route::resource('usuario', 'UsuarioController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
-		Route::resource('permissao', 'PermissaoController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
-		Route::resource('tipo-usuario', 'TipoUsuarioController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 	// });
 });

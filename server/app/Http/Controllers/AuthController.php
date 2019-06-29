@@ -8,32 +8,14 @@ use JWTAuth;
 use Illuminate\Support\Facades\Input;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Utils;
-use App\Models\Usuario;
+use App\Models\User;
 
 class AuthController extends Controller {
 
     public function login() {
         $credentials = Input::all();
 
-        if(!filter_var($credentials['email'], FILTER_VALIDATE_EMAIL)) {
-            $user = Usuario::where(['username' => $credentials['email']])
-                ->select('email')
-                ->first();
-
-            if(isset($user))
-                $credentials['email'] = $user['email'];
-		}
-
-		$user = Usuario::where(['email' => $credentials['email']])
-			->select('is_active')
-			->first();
-
-		if($user['is_active'] == 0) {
-			return response()->json([
-				'success' => false,
-				'error' => 'Não é possível acessar o sistema com um usuário inativo'
-			], 401);
-		}
+        $user = User::where(['email' => $credentials['email']])->first();
 
         try {
             if ( !$token = JWTAuth::attempt($credentials))
@@ -83,9 +65,9 @@ class AuthController extends Controller {
 
     public function recoverPassword() {
         try {
-            $user = Usuario::where('email', Input::get('email'))->first();
+            $user = User::where('email', Input::get('email'))->first();
 
-            // Found Usuario
+            // Found User
             if(isset($user)) {
                 $newPassword = Utils::random();
                 $user->update(['password' => bcrypt($newPassword)]);
