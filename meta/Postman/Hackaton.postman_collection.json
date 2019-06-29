@@ -64,13 +64,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{URI}}/user/1",
+							"raw": "{{URI}}/user/4",
 							"host": [
 								"{{URI}}"
 							],
 							"path": [
 								"user",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -90,7 +90,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Testador da Silva\",\n\t\"email\": \"testador@email.com\",\n\t\"password\": \"123456\"\n}"
+							"raw": "{\n\t\"name\": \"Testador da Silva\",\n\t\"email\": \"testador@email.com\",\n\t\"password\": \"123456\",\n\t\"roles\": [2]\n}"
 						},
 						"url": {
 							"raw": "{{URI}}/user",
@@ -118,16 +118,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Testador\"\n}"
+							"raw": "{\n\t\"name\": \"Testador\",\n\t\"roles\": [2]\n}"
 						},
 						"url": {
-							"raw": "{{URI}}/user/2",
+							"raw": "{{URI}}/user/4",
 							"host": [
 								"{{URI}}"
 							],
 							"path": [
 								"user",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -150,13 +150,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{URI}}/user/2",
+							"raw": "{{URI}}/user/4",
 							"host": [
 								"{{URI}}"
 							],
 							"path": [
 								"user",
-								"2"
+								"4"
 							]
 						}
 					},
