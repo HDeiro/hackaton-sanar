@@ -18,12 +18,14 @@ document.addEventListener("deviceready", function(){
   document.addEventListener('backbutton', f.onBackKeyDown, false);
 }, false);
 
+app.router.navigate('/home');
 
-$$('#logoIntro').animationEnd(function(){  
-  setTimeout(function(){
-    auth.verif();
-  }, 1000);
-});
+// $$('#logoIntro').animationEnd(function(){  
+//   setTimeout(function(){
+//     // auth.verif();
+//     app.router.navigate('/home');
+//   }, 1000);
+// });
 
 
 
