@@ -23,5 +23,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function() {
 		Route::post('logout', 'AuthController@logout');
 		Route::post('refresh', 'AuthController@refresh');
 		Route::post('authenticate', 'AuthController@authenticate');
+
+		Route::resource('user', 'UserController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 	// });
 });
