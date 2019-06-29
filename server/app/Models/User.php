@@ -39,7 +39,7 @@ class User extends Authenticatable
     }
 
     public function calcScore() {
-        $this['score'] = Mission::select(DB::raw('NVL(SUM(mission.score), 0) as sum_score'))
+        $this['score'] = Mission::select(DB::raw('IFNULL(SUM(mission.score), 0) as sum_score'))
             ->where('mission.is_completed', 1)
             ->where('patient_id', $this['id'])
             ->pluck('sum_score')
