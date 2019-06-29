@@ -1,0 +1,40 @@
+<template>
+        <div class="page no-navbar no-toolbar no-swipeback login-page" data-name="login">
+            <div class="page-content">
+                <div class="account-page">
+                    <div class="account-inner">
+                        <div class="account-center">
+                            <div class="account-content">
+                                <div class="account-logo">
+                                    <img alt="" src="assets/img/logo.png">
+                                </div>
+                                <div class="account-title">
+                                    <h3>Login</h3>
+                                </div>
+                                <div class="account-form">
+                                    <form module="auth.login" class="form form-ajax-submit" method="post" action="http://gopontoaponto.com.br/api-ocorrencias/public/login">
+                                        <div class="input-list">
+                                            <input type="hidden" name="device" id="inputDevice">
+                                        </div>
+                                        <div class="input-list">
+                                            <input type="text" name="username" placeholder="Nome de usuário">
+                                        </div>
+                                        <div class="input-list">
+                                            <input type="password" name="password" placeholder="Senha">
+                                        </div>
+                                        <div class="input-list">
+                                            <a href="/forgot-password/" onclick="animateLogo();">Esqueceu sua senha?</a>
+                                        </div>
+                                        <div class="input-list">
+                                            <button class="button button-big account-btn">Entrar</button>
+                                        </div>						
+                                    </form>	
+                                    <!-- <p class="text-align-center m-b-0">Donâ€™t have an account? <a href="/register/">Register</a></p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </template>
