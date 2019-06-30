@@ -1,48 +1,44 @@
 moment.locale('pt-BR');
-const api = '';
+const api = 'https://api.sanar.hugodeiro.com/api/v1';
+
+var dataCategory;
+var demoGauge;
 
 // Dom7
 const $$ = Dom7;
 
 // Init App
 var app = new Framework7({
-  name: 'JANBOOK',
-  id: 'br.com.janbook',
+  name: 'Health Track',
+  id: 'br.com.healthtrack',
   root: '#app',
   theme: 'auto',
   routes: routes
 });
 
+$d = (selector) => {
+	return $(`div[data-name="`+$(app.view.main.router.currentPageEl).attr('data-name')+`"] `+selector);
+}
 
 document.addEventListener("deviceready", function(){
   document.addEventListener('backbutton', f.onBackKeyDown, false);
 }, false);
 
-app.router.navigate('/home');
-
 $$('#logoIntro').animationEnd(function(){  
   setTimeout(function(){
-    // app.router.navigate('/login/');
-      authInfo.open();
-  }, 2000);
+    if(app.form.getFormData('user') == undefined || app.form.getFormData('user') == ''){
+      app.router.navigate('/login/');
+    }else{
+      home.lista();
+    }
+    
+  }, 500);
 });
 
-var authInfo = app.dialog.create({
-  title: 'Olá Gamer, eu sou o Léo',
-  text: `
-    <p>
-      Vejo que você não tem registro do COMBATE J neste dispositivo.
-    </p>
-    <p>
-      Você tem duas opções.
-    </p>
-    <div class="row" style="padding-top: 20px;">
-      <button onclick="game.modalAuth(2);" class="col button button-fill">Cadastre-se</button>
-      <button onclick="game.modalAuth(3);" class="col button button-fill">Fazer Login</button>
-    </div>
-  `
-});
-
+function alertErroRequest(){
+  app.dialog.close();
+  app.dialog.alert('Ocorreu um erro ao acessar o servidor, verifique sua conexão ou seu usuário e senha. Se o erro persistir entre em contato com o suporte!');
+}
 
 
 

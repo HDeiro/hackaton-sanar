@@ -8,34 +8,42 @@
                                                 <div style="text-align: center;">
                                                     <img alt="" src="src/img/logo.png" style="width: 50vw; padding-bottom: 20px;">
                                                 </div>
-                                                <form id="formLogin">
+                                                <form id="formCadastro">
                                                     <div class="card" style="padding: 20px;">
                                                         <div class="card-content card-content-padding">
                                                             <div class="list inline-labels no-hairlines-md">
                                                                 <ul>
+                                                                    
                                                                     <li class="item-content item-input">
                                                                         <div class="item-inner">
                                                                             <div class="item-input-wrap">
-                                                                                <input type="text" name="email" placeholder="Seu email" required>
+                                                                                <input type="text" name="name" placeholder="Digite seu nome" required>
                                                                                 <span class="input-clear-button"></span>
                                                                             </div>
                                                                         </div>
                                                                     </li>
+
+                                                                    <li class="item-content item-input">
+                                                                            <div class="item-inner">
+                                                                                <div class="item-input-wrap">
+                                                                                    <input type="text" name="email" placeholder="Digite seu email" required>
+                                                                                    <span class="input-clear-button"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    
                                                                     <li class="item-content item-input">
                                                                         <div class="item-inner">
                                                                             <div class="item-input-wrap">
-                                                                                <input type="password" name="password" placeholder="Sua senha" required>
+                                                                                <input type="text" name="password" placeholder="Digite sua senha" required>
                                                                                 <span class="input-clear-button"></span>
                                                                             </div>
                                                                         </div>
                                                                     </li>
+
                                                                 </ul>
                                                                 <div style="padding: 10px; padding-top: 30px">
-                                                                    <a class="col button button-fill block" onclick="auth.processLogin()">Entrar</a>
-                                                                </div>
-
-                                                                <div style="padding: 10px; padding-top: 30px">
-                                                                    <button class="col button color-gray block">Esqueci minha senha</button>
+                                                                    <a class="col button button-fill block" onclick="auth.processCadastro()">Cadastrar-me</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -44,7 +52,7 @@
 
 
                                                 <div style="padding: 10px; padding-top: 10px">
-                                                    <button class="col button color-white block" onclick="app.router.navigate('/cadastro/');">Cadastre-se</button>
+                                                    <button class="col button color-white block">Esqueci minha senha</button>
                                                 </div>
                                             </div>
 									</div>

@@ -1,58 +1,248 @@
 <template>
-    <div class="navbar" data-name="home">
-        <div class="navbar-inner">
-          <div class="title">Search Bar</div>
-          <div class="subnavbar">
-            <!-- Searchbar with auto init -->
-            <form class="searchbar">
-              <div class="searchbar-inner">
-                <div class="searchbar-input-wrap">
-                  <input type="search" placeholder="Search">
-                  <i class="searchbar-icon"></i>
-                  <span class="input-clear-button"></span>
-                </div>
-                <span class="searchbar-disable-button">Cancel</span>
-              </div>
-            </form>
+    <div class="page">
+        <div class="toolbar tabbar tabbar-labels toolbar-bottom-md animated slideInUp delay-1s faster" style="background: #50a36d;">
+          <div class="toolbar-inner">
+            
+            <a href="#tab-1" class="tab-link animated slideInUp delay-1s faster tab-link-active">
+              <i class="icon material-icons">check <span class="badge color-red" style="margin-left: 5px;">5</span></i>
+              <span class="tabbar-label">Minhas Metas</span>
+            </a>
+            
+            <a href="#tab-2" class="tab-link animated slideInUp delay-1s faster">
+              <i class="icon f7-icons ios-only"></i>
+              <i class="icon material-icons">search</i>
+              <span class="tabbar-label">Buscar Médico</span>
+            </a>
+
           </div>
         </div>
-      </div>
-      <div class="page-content">
-        <!-- Searchbar backdrop -->
-        <div class="searchbar-backdrop"></div>
-        <!-- hide-on-search element -->
-        <div class="block searchbar-hide-on-search">
-          <p>This block will be hidden on search. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+        <div class="tabs">
+          <div class="page-content tab tab-active" style="background: #e6e6e6;" id="tab-1">
+              <div>
+                <i class="icon material-icons link" style="font-size: 30px; position: absolute; right: 20px; top: 20px; color:red; z-index: 99999999;" onclick="auth.logout()">power_settings_new</i>
+              </div>
+              <div class="block text-align-center">
+                  <div class="row">
+                      <div class="col-30"></div>
+                    <div class="col-40">
+                      <span id="perfil_animate" style="width: 100px;"></span>
+                    </div>
+                    <div class="col-30"></div>
+                  </div>
+                  <div class="row">
+                    <div style="width: 100%;">
+                      <div style="font-size: 20px" style="font-size: 20px;">{{ data.user.name }}</div>
+                      <div style="font-size: 20px">Meu score</div>
+                      <div style="font-size: 40px; margin-top: -10px; color: #FF9800;">{{ data.dados.score }}</div>
+                    </div>
+                  </div>
+              </div>
+
+            <div class="card">
+              <div class="card-content card-content-padding">
+                <span style="font-size: 20px">
+                  Olá {{ data.user.name }},</span><br>esta é a sua área de Metas, siga a risca cada uma, o médico que a receitou estará lhe acompanhando, e lhe avaliando.<br>
+                  Caso marque metas erradas, seu médico pode diminuir seu saldo de score.
+              </div>
+            </div>
+
+            <div class="listCat">
+
+            </div>
+
+          </div>
+
+          <div class="page-content tab tab" style="background: #e6e6e6;" id="tab-2">
+            <div class="card animated bounceInDown">
+              <form class="searchbar" style="box-shadow: none!important; margin: 0px;">
+                <div class="searchbar-inner">
+                  <div class="searchbar-input-wrap">
+                    <input type="search" placeholder="Buscar médico">
+                    <i class="searchbar-icon"></i>
+                    <span class="input-clear-button"></span>
+                  </div>
+                  <span class="searchbar-disable-button">Cancel</span>
+                </div>
+              </form>
+            </div>
+            <div class="block">
+              <div class="searchbar-backdrop"></div>     
+              <div class="list searchbar-found media-list">
+                <div class="card animated fadeInUp delay-1s">
+                  <div class="item-content">
+                    <div class="item-media"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/HouseGregoryHouse.png/250px-HouseGregoryHouse.png" width="44"/></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">Dr. House</div>
+                      </div>
+                      <div class="item-subtitle">Pisicólogo</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="block searchbar-not-found">
+              <div class="block-inner">Não encontrado</div>
+            </div>
+          </div>
+          
         </div>
-        <!-- search target list -->
-        <div class="list searchbar-found">
-          <ul>
-            <li class="item-content">
-              <div class="item-inner">
-                <div class="item-title">Acura</div>
-              </div>
-            </li>
-            <li class="item-content">
-              <div class="item-inner">
-                <div class="item-title">Audi</div>
-              </div>
-            </li>
-            <li class="item-content">
-              <div class="item-inner">
-                <div class="item-title">BMW</div>
-              </div>
-            </li>
-            ...
-            <li class="item-content">
-              <div class="item-inner">
-                <div class="item-title">Volvo</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <!-- Nothing found message -->
-        <div class="block searchbar-not-found">
-          <div class="block-inner">Nothing found</div>
-        </div>
-      </div>
 </template>
+
+<script>
+    return {
+        on: {
+            pageBeforeIn(){
+                
+            },
+            pageAfterIn(){
+              var data = this.data.dados.data;
+              countCheckInit = 0;
+              
+              console.log(data);
+              for (let i = 0; i < data.length; i++) {
+                var e = this.data.dados.data[i];
+                var isChecked = '';
+                if(i == 0){
+                  $('.listCat').append(`
+                    <div class="card">
+                      <div class="block" style="height: 40px;"></div>
+                      <div class="card-content card-content-padding">
+                        <div class="block text-align-center">
+                          <div class="gauge gauge-`+e.patient_id+`">
+                            <div style="position: absolute;"id="screenFull-`+e.patient_id+`"></div>
+                          </div>
+                          <div class="list">
+                            <div class="block" style="height: 40px;"></div>
+                            <ul class="list-`+e.patient_id+`">
+                              <li>
+                                <label class="item-checkbox item-content">
+                                  <input class="count_list count_list-`+e.patient_id+`" desc="`+e.patient_id+`" id_prot="`+e.patient_id+`" type="checkbox" name="demo-checkbox" value="" `+isChecked+`/>
+                                  <i class="icon icon-checkbox"></i>
+                                  <div class="item-inner">
+                                    <div class="item-title">`+e.description+` `+moment(e.mission_deadline, 'Y-M-D HH:mm:ss').format('DD/MM/Y [as] HH:mm')+`</div>
+                                  </div>
+                                </label>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `);
+
+                  demoGauge = app.gauge.create({
+                    el: '.gauge-'+e.patient_id,
+                    type: 'circle',
+                    value: 0,
+                    size: 200,
+                    borderColor: '#50a36d',
+                    borderWidth: 10,
+                    valueText: '0%',
+                    valueFontSize: 41,
+                    valueTextColor: '#50a36d',
+                    labelText: 'Metas alcançadas',
+                  });
+
+                  e.gauge = demoGauge;
+
+                  if(e.is_completed == 1){
+                    var isChecked = 'checked="true"';
+                    countCheckInit = countCheckInit + 1;
+                    demoGauge.update({
+                      value: countCheckInit / data.length,
+                      valueText: ((countCheckInit / data.length) * 100).toFixed(2) + '%'
+                    });
+                  }
+                }else{
+                  if(e.is_completed == 1){
+                    var isChecked = 'checked="true"';
+                    countCheckInit = countCheckInit + 1;
+                    demoGauge.update({
+                      value: countCheckInit / data.length,
+                      valueText: ((countCheckInit / data.length) * 100).toFixed(2) + '%'
+                    });
+                  }
+                  $('.list-'+e.patient_id).append(`
+                    <li>
+                      <label class="item-checkbox item-content">
+                        <input class="count_list count_list-`+e.patient_id+`" desc="`+e.patient_id+`" id_prot="`+e.patient_id+`" type="checkbox" name="demo-checkbox" value="" `+isChecked+`/>
+                        <i class="icon icon-checkbox"></i>
+                        <div class="item-inner">
+                          <div class="item-title">`+this.data.dados.data[i].description+` `+moment(e.mission_deadline, 'Y-M-D HH:mm:ss').format('DD/MM/Y [as] HH:mm')+`</div>
+                        </div>
+                      </label>
+                    </li>
+                  `);
+                }            
+              }
+
+        
+
+            },
+            pageInit() {
+              app.dialog.close();
+
+              // Change demo gauge on button click
+              $(document).on('change', '.count_list', function () {
+                var p = $(this);
+                
+                if ( $(p).prop('checked') ) {
+                  app.dialog.confirm('Deseja marcar esta missão como concluída?', function(){
+                    $(p).prop('checked', true);
+                  }, function(){
+                    $(p).prop('checked', false);
+                  });
+                  
+                  
+                  demoGauge.update({
+                    value: $('.count_list-'+p.attr('id_prot')+':checked').length / $('.count_list-'+p.attr('id_prot')).length,
+                    valueText: (($('.count_list-'+p.attr('id_prot')+':checked').length / $('.count_list-'+p.attr('id_prot')).length) * 100).toFixed(2) + '%'
+                  });
+
+                  if( $('.count_list-'+p.attr('id_prot')+':checked').length == $('.count_list-'+p.attr('id_prot')).length ){
+                  var animItem = bodymovin.loadAnimation({
+                    container: document.getElementById('screenFull-'+p.attr('id_prot')), // the dom element that will contain the animation
+                    renderer: 'svg',
+                    loop: false,
+                    autoplay: true,
+                    width: 300,
+                    path: 'src/img/cofetti.json' // the path to the animation json
+                  });
+                  animItem.play();
+
+                  setTimeout(function(){
+                    $('#screenFull-'+p.attr('id_prot')).html('');
+                  }, 2000);
+                }
+                }else{
+                  $(p).prop('checked', true);
+                }
+              });
+
+              var perfilAnimation = bodymovin.loadAnimation({
+                container: document.getElementById('perfil_animate'), // the dom element that will contain the animation
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'src/img/perfil.json' // the path to the animation json
+              });
+              perfilAnimation.play();
+
+
+              var searchbar = app.searchbar.create({
+                el: '.searchbar',
+                searchContainer: '.list',
+                searchIn: '.item-title',
+                on: {
+                  search(sb, query, previousQuery) {
+                    console.log(query, previousQuery);
+                  }
+                }
+              });
+            },
+
+        }
+    }
+</script>

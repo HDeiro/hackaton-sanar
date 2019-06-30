@@ -2,3 +2,7 @@ body, .page{
     background: #50a36d;
 }
   
+.btnDialogLeft{
+  position: absolute!important;
+  left: 10px!important;
+}
