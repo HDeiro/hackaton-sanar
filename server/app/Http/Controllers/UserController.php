@@ -83,7 +83,8 @@ class UserController extends Controller
             DB::commit();
 
             return [
-                'success' => true
+                'success' => true,
+                'data' => $user
             ];
         } catch (\Exception $ex) {
             DB::rollback();

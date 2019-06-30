@@ -1,0 +1,91 @@
+@import '../../../styles/placeholders';
+@import '../../../styles/constants';
+
+mat-toolbar * {
+  color: white;
+}
+
+mat-nav-list {
+  padding-top: 0;
+}
+
+mat-sidenav {
+  background: $darken-theme-color;
+
+  &-content {
+    background: whitesmoke;
+  }
+}
+
+.sidenav {
+  width: 200px;
+
+  &-container {
+    height: 100%;
+  }
+
+  &.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .mat-toolbar {
+    background: inherit;
+  }
+}
+
+.logo {
+  @extend %display-flex-aic-jcc;
+  height: 160px;
+  background: $theme-color !important;
+  border-bottom: 5px solid $darken-theme-color;
+
+  img {
+    width: 60%;
+  }
+}
+
+.menu-item {
+  color: white;
+  transition: background 300ms ease-out;
+
+  &:hover {
+    background: $lighten-theme-color;
+  }
+}
+
+.active-route {
+  background: $theme-color;
+}
+
+.filter {
+  @extend %display-flex-aic-jcc;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  input {
+    padding: 8px 12px;
+    border-radius: 30px;
+    border: none;
+    width: 80%;
+    font-family: $font-family;
+    background-color: $lighten-theme-color;
+    color: white;
+    transition: background-color 300ms ease-out;
+    outline: none;
+
+    &:hover {
+      background-color: $theme-color;
+    }
+
+    &::placeholder {
+      color: white;
+    }
+
+    &:focus {
+      background-color: white;
+      color: $theme-color;
+    }
+  }
+}

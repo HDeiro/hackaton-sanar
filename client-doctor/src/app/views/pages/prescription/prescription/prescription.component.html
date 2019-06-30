@@ -1,0 +1,95 @@
+<div class="padding-content">
+  <mat-form-field class="full-width">
+    <mat-label>Paciente</mat-label>
+    <mat-select [(ngModel)]="prescription.patient_id">
+      <mat-option *ngFor="let option of options" 
+        [value]="option.id">
+        {{ option.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-card *ngFor="let prescription_item of prescription.prescription_items; let itemIndex = index">
+    <mat-card-header>
+      <mat-card-title>
+        <h3 style="font-size: 18px">Item {{itemIndex + 1}}</h3>
+
+        <button mat-icon-button color="primary"
+          (click)="prescription.prescription_items.splice(itemIndex, 1)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="padding-content">
+      <mat-form-field class="full-width">
+        <input matInput 
+          required
+          placeholder="Descrição" 
+          [(ngModel)]="prescription_item.description"
+          name="description">
+      </mat-form-field>
+      
+      <mat-form-field class="full-width">
+        <input matInput type="number"
+          required
+          minvalue="1"
+          placeholder="Periodicidade" 
+          [(ngModel)]="prescription_item.periodicity"
+          name="periodicity">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Tipo de Periodicidade</mat-label>
+        <mat-select [(ngModel)]="prescription_item.periodicity_type">
+          <mat-option *ngFor="let option of periodicity_types" 
+            [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field style="margin-right: 12px;">
+        <input matInput 
+          [(ngModel)]="prescription_item.initial_date"
+          [matDatepicker]="initial_date" 
+          placeholder="Initial Date Period">
+        <mat-datepicker-toggle matSuffix [for]="initial_date"></mat-datepicker-toggle>
+        <mat-datepicker #initial_date></mat-datepicker>
+      </mat-form-field>
+      
+      <mat-form-field style="margin: 12px;">
+        <input matInput 
+          [(ngModel)]="prescription_item.final_date"
+          [matDatepicker]="final_date" 
+          placeholder="Final Date Period">
+        <mat-datepicker-toggle matSuffix [for]="final_date"></mat-datepicker-toggle>
+        <mat-datepicker #final_date></mat-datepicker>
+      </mat-form-field>
+
+      <mat-checkbox color="primary"
+        [(ngModel)]="prescription_item.is_medicine">
+        É um item de medicamento?
+      </mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="actions" align="right">
+    <button mat-raised-button  
+      (click)="prescription.prescription_items.push({})">
+      Adicionar mais um item
+    </button>
+    
+    <button mat-raised-button  
+      [routerLink]="'/user'">
+      Cancelar
+    </button>
+
+    <button mat-raised-button
+      type="submit" 
+      color="primary"
+      (click)="savePrescription()">
+      Salvar
+    </button>
+  </div>
+</div>

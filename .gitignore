@@ -1,4 +1,5 @@
 /client/node_modules
+/client-doctor/node_modules
 /server/public/hot
 /server/public/storage
 /server/storage/*.key

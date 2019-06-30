@@ -1,0 +1,40 @@
+%display-flex {
+    display: flex;
+}
+
+%display-flex-aic-jcsb {
+  @extend %display-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%display-flex-aic-jcc {
+  @extend %display-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%display-flex-aic-jcc-fww {
+  @extend %display-flex-aic-jcc;
+  flex-wrap: wrap;
+}
+
+%display-flex-aifs-jcc {
+    @extend %display-flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+%display-flex-aifs-jcfs-fww {
+    @extend %display-flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+%display-flex-aic-jcc-fww {
+    @extend %display-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}

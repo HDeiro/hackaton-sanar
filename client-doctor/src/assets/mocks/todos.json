@@ -1,0 +1,37 @@
+[
+    {
+        "title": "A fantastic card title",
+        "content": "A fantastic card content<br/><b>:)</b>",
+        "createdAt": "2018-01-29",
+        "author": {
+            "name": "Hugo"
+        },
+        "actions": [ "remove", "privatize" ]
+    },
+    {
+        "title": "Learning Angular",
+        "content": "Learning <i>angular</i><br/><b>:)</b>",
+        "createdAt": "2019-01-29",
+        "author": {
+            "name": "Hugo"
+        },
+        "actions": [ "remove", "privatize" ]
+    },
+    {
+        "title": "Learning Go",
+        "content": "Learning <i>GO</i><br/><b>:)</b>",
+        "createdAt": "2018-01-29",
+        "author": {
+            "name": "Hugo"
+        },
+        "actions": [ "remove", "privatize" ]
+    },
+    {
+        "title": "Creating AnGolar",
+        "content": "Creating Angolar",
+        "createdAt": "2019-01-19",
+        "author": {
+            "name": "Hugo"
+        }
+    }
+]

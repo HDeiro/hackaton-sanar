@@ -1,0 +1,111 @@
+@import '../../../styles/constants';
+@import '../../../styles/placeholders';
+
+.login-container {
+    @extend %display-flex-aic-jcc;
+
+    width: 100vw;
+    height: 100vh;
+    background: whitesmoke;
+}
+
+mat-card {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &-header::ng-deep {
+        background-color: $theme-color;
+        padding-top: 8px;
+        padding-bottom: 8px;
+
+        .mat-card-title {
+            margin: 0;
+            color: white;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .mat-card-header-text {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    &-content {
+        @extend %display-flex-aic-jcc-fww;
+
+        height: 110px;
+        padding: 16px;
+        margin: 0;
+    }
+
+    &-actions {
+        @extend %display-flex-aic-jcsb;
+
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 16px !important;
+        margin: 0 !important;
+
+        button {
+            margin: 0;
+        }
+    }
+}
+
+.card-wrapper {
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.animated-logo {
+    width: 160px;
+    position: absolute;
+    transition: transform 600ms ease-out;
+}
+
+#golang {
+    top: -50px;
+    transform: rotate(315deg) scale(0);
+    left: -85px;
+    transform-origin: right bottom;
+
+    &.active {
+        transform: rotate(315deg) scale(1);
+    }
+
+    @media(max-width: $width-to-responsive) {
+        top: -70px;
+        left: 0;
+
+        &.active {
+            transform: rotate(0) scale(1);
+        }
+    }
+}
+
+#angular {
+    left: 95%;
+    transform: rotate(45deg) scale(0);
+    bottom: 20px;
+    transform-origin: left;
+
+    &.active {
+        transform: rotate(45deg) scale(1);
+    }
+
+    @media(max-width: $width-to-responsive) {
+        top: -80px;
+        right: 0;
+        left: 55%;
+        transform-origin: right bottom;
+
+        &.active {
+            transform: rotate(0) scale(1);
+        }
+    }
+}

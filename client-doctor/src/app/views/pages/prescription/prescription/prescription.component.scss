@@ -1,0 +1,28 @@
+@import '../../../../../styles/constants';
+@import '../../../../../styles/placeholders';
+
+mat-card::ng-deep {
+    margin-top: 8px;
+
+    &:first-child, &:first {
+        margin-top: 0;
+    }
+}
+
+mat-card-header::ng-deep {
+    &, & * {
+        margin-bottom: 0 !important;
+    }
+    .mat-card-header-text {
+        width: 100% !important;
+    }
+}
+
+mat-card-title {
+    @extend %display-flex-aic-jcsb;
+    width: 100%;
+}
+
+mat-card-content {
+    padding-top: 0 !important;
+}

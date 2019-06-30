@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Hugo Deiró",
+        "email": "hugo@email.com",
+        "createdAt": "2019-01-29"
+    },
+    {
+        "name": "Arthur",
+        "email": "arthur@email.com",
+        "createdAt": "2019-01-30"
+    },
+    {
+        "name": "Athus",
+        "email": "athus@email.com",
+        "createdAt": "2019-01-30"
+    },
+    {
+        "name": "Rene",
+        "email": "rene@email.com",
+        "createdAt": "2019-01-25"
+    },
+    {
+        "name": "Justin",
+        "email": "justin@email.com",
+        "createdAt": "2019-01-22"
+    }
+]

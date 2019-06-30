@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+@import './styles/constants';
+@import './styles/placeholders';
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-card-title, mat-card-footer {
+  color: $theme-color;
+}
+
+.padding-content {
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// Hides Froala WYSIWYG logo
+.second-toolbar #logo { 
+  visibility: hidden;
+}
+
+.zebra-table {
+  tr:nth-child(even) {
+    background: whitesmoke !important;
+  }
+}
+
+.filter-container {
+  @extend %display-flex-aic-jcsb;
+  
+  mat-form-field {
+    margin: 0 5px;
+  
+    width: 95%;
+  }
+}
+
+.actions {
+  button {
+      margin-top: 12px;
+      margin-left: 6px;
+  }
+}
+
+// Colors
+.color-danger {
+  color: $danger-color;
+}
+
+.theme-color {
+  color: $theme-color;
+}
+
+//Text utilitaries
+.text-center {
+  text-align: center;
+}
+
+.not-found {
+  overflow: hidden;
+
+  .message {
+    font-size: 18px;
+    text-align: center;
+
+    span {
+      color: $danger-color;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
