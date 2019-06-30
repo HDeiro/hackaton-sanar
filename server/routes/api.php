@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function() {
 
 		Route::post('mission/complete', 'MissionController@completeMission');
 		Route::get('mission/list', 'MissionController@listUserMissions');
+		Route::get('mission/calcScore', 'MissionController@calcUserScore');
 		
 	// });
 });

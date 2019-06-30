@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Mockery\CountValidator\Exception;
 use App\Models\Mission;
+use App\Models\User;
 use App\Utils;
 
 class MissionController extends Controller
@@ -28,6 +29,15 @@ class MissionController extends Controller
         }
     }
 
+    public function calcUserScore() {
+        $score = User::find(Input::get('patient_id'))->calcScore();
+
+        return [
+            'success' => true,
+            'data' => ['score' => $score]
+        ];
+    }
+
     public function listUserMissions() {
         try {
             $missions = Mission::where(function($query) {
@@ -43,9 +53,12 @@ class MissionController extends Controller
                     $query->where('description', 'like', '%'.Input::get('description').'%');
             })->where('patient_id', Input::get('patient_id'))->get();
 
+            $score = User::find(Input::get('patient_id'))->calcScore();
+
             return [
                 'success' => true,
-                'data' => $missions
+                'data' => $missions,
+                'score' => $score
             ];
         } catch (\Exception $ex) {
             return Utils::treatException($ex, 'Não foi possível atualizar Usuário');
