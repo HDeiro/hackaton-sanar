@@ -13,15 +13,18 @@ use App\Utils;
 class UserController extends Controller
 {
     public function index() {
-        $query = User::where(function($query) {
+        $query = User::join('user_roles', 'user_roles.user_id', 'user.id')->where(function($query) {
             if (Input::has('q') && !empty(Input::get('q'))) {
                 $q = Input::get('q');
                 $query->where('user.name', 'like', '%'.$q.'%')
                     ->orWhere('user.email', 'like', '%'.$q.'%');
             }
-        });
+
+            if(Input::has('onlyMedico')) 
+                $query->where('user_roles.role_id', 1);
+        })->distinct()->select('user.*');
+
         // Count the number of occurrences in User table
-        $count = $query->count();
         
         // Skips / Fetch elements
         if( !Input::has('skip') && !Input::has('take')) {
@@ -34,8 +37,7 @@ class UserController extends Controller
 
         return [
             'success' => true,
-            'data' => $dataset,
-            'count' => $count
+            'data' => $dataset
         ];
     }
 
@@ -97,7 +99,7 @@ class UserController extends Controller
 				'roles'
             ]);
 
-			$hasToEditPassword = Input::has('password') && ! is_null($data['password']);
+            $hasToEditPassword = Input::has('password') && ! is_null($data['password']);
 
             $user = User::find($id);
 
@@ -119,10 +121,6 @@ class UserController extends Controller
 					]);
 				}
 			}
-
-			if($hasToEditPassword) {
-                //Send e-mail to user with new password
-            }
 
             DB::commit();
             return [
